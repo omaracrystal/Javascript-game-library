@@ -3,3 +3,19 @@
   padding: 10px;
   border: 1px solid black;
 }
+
+
+.table {
+  max-width: 800px;
+}
+
+th {
+  width: 200px;
+  text-align: center;
+}
+
+td {
+  width: 200px;
+}
+
+
