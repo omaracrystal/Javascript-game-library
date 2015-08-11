@@ -1,62 +1,70 @@
 // add scripts
 $(document).on('ready', function() {
   console.log('sanity check!');
-  $('body').append("<div class='form-group'> <form id='myForm' class= 'form-control'><b>TITLE:</b><input type='text' name='title' data= 'title' required><br><br><b>GENRE:</b><input type= 'text' name= 'genre' data= 'genre' required><br><br><input type='submit'><br><br><table class= 'table table-bordered'><tr><th><b>TITLE</b></th><th><b>GENRE</b></th></tr></table></div>")
-    // .append(input.render())
-    // .append(cribbage.render())
+
+  //creating a form for game library and table header set up
+  $('body').append("<div class='form-group'> <form id='myForm' class= 'form-control'><b>TITLE:</b><input type='text' name='title' data= 'title' id='title' required><br><br><b>GENRE:</b><input type= 'text' name= 'genre' data= 'genre' id='genre' required><br><br><input type='submit'><br><br><table class= 'table table-bordered'><tr><th><b>TITLE</b></th><th><b>GENRE</b></th></tr></table></div>")
 
 
-var Game = function (title, genre) {
-  this.title = title;
-  this.genre = genre;
-};
+  // //creating a Game class
+  // var Game = function (title, genre) {
+  //   this.title = title;
+  //   this.genre = genre;
+  // };
+
+
+  // var GameLibrary = function (title) {
+  //   this.title = title;
+  //   this.games = [];
+  // }
+
+  // GameLibrary.prototype.addGame = function(game) {
+  //   this.games.push(game);
+  // };
 
 
 
-var GameLibrary = function (title) {
-  this.title = title;
-  this.games = [];
-}
+  // Game.prototype.render = function(){
+  //   this.$element = $("tbody")
+  //     .append('<tr><td>'+ this.title + '</td><td>' +this.genre + '</td></tr>')
+  //     return this.$element;
+  // }
 
 
-GameLibrary.prototype.addGame = function(game) {
-  this.games.push(game);
-};
+
+  var gameArray = [];
+  var titleArray = [];
 
 
-Game.prototype.render = function(){
-  this.$element = $("tbody")
-    .append('<tr><td>'+ this.title + '</td><td>' +this.genre + '</td></tr>')
-    return this.$element;
-}
+  $('#myForm').on('submit', function(e) {
+    e.preventDefault();
 
-var gameArray = [];
+    //grab values
+    var title = $('input:eq(0)').val();
+    var genre = $('input:eq(1)').val();
+    // $('input').val('');
 
-$('#myForm').on('submit', function(e) {
-  e.preventDefault();
+    if (titleArray.indexOf(title) === -1) {
+      var game = {Title: title, Genre: genre};
 
-  //grab values
-  var title = $('input:eq(0)').val();
-  var genre = $('input:eq(1)').val();
-  $('.table').append('<tr><td>'+title+'</td><td>'+genre+'</td></tr>')
-  //iterate over table titles and genres
-  for (var i = 0; i < $("tbody").length; i++) {
-    // if (title.indexOf && genre.indexOf === -1) {
-      gameArray.push({Title: title, Genre: genre});
+      titleArray.push(title);
 
-    // }
-  }
+      //creating an object arr ay of games with titles and genres
+      gameArray.push(game);
 
-  console.log(gameArray);
+      //appending values to DOM
+      $('.table').append('<tr><td>'+title+'</td><td>'+genre+'</td></tr>');
 
-});
+      console.log(gameArray);
 
-});
+    };
 
-// Game.prototype.addGame = function(title, genre) {
-//   for (var i = 0; i < tbody.length; i++) {
-//     if (title.indexOf && genre.indexOf === -1)
-//   };
-// }
-// });
+  //clear out input fields once submit button is clicked
+    $('#title').val('');
+    $('#genre').val('');
+
+    });
+
+
+  });
 
